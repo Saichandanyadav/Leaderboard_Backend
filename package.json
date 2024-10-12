@@ -1,0 +1,21 @@
+{
+  "name": "chandanbackend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon run dev",
+    "start": "node index"
+  },
+  "dependencies": {
+    "backend": "file:",
+    "Chandan_backend": "file:",
+    "chandanbackend": "file:",
+    "Chandanbackend": "file:",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.1",
+    "nodemon": "^3.1.7"
+  }
+}
