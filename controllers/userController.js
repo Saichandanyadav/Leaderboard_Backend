@@ -65,7 +65,7 @@ const deleteUser = async (req, res) => {
 
 // Claim Points
 const claimPoints = async (req, res) => {
-    const randomPoints = Math.floor(Math.random() * 10) + 1; // Random points between 1 and 10
+    const randomPoints = Math.floor(Math.random() * 1000) + 1; // Random points between 1 and 10
 
     try {
         const user = await User.findById(req.params.id);
