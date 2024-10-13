@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
         await newUser.save();
         res.status(201).json(newUser);
     } catch (error) {
-        res.status(400).json({ message: 'Error creating user', error });
+        res.status(400).json({ message: 'Error creating user', error: error.message });
     }
 };
 
@@ -20,7 +20,7 @@ const getAllUsers = async (req, res) => {
         const users = await User.find();
         res.json(users);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching users', error });
+        res.status(500).json({ message: 'Error fetching users', error: error.message });
     }
 };
 
@@ -31,7 +31,7 @@ const getUserById = async (req, res) => {
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching user', error });
+        res.status(500).json({ message: 'Error fetching user', error: error.message });
     }
 };
 
@@ -42,7 +42,7 @@ const updateUser = async (req, res) => {
         if (!updatedUser) return res.status(404).json({ message: 'User not found' });
         res.json(updatedUser);
     } catch (error) {
-        res.status(400).json({ message: 'Error updating user', error });
+        res.status(400).json({ message: 'Error updating user', error: error.message });
     }
 };
 
@@ -53,7 +53,7 @@ const deleteUser = async (req, res) => {
         if (!deletedUser) return res.status(404).json({ message: 'User not found' });
         res.json({ message: 'User deleted successfully' });
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting user', error });
+        res.status(500).json({ message: 'Error deleting user', error: error.message });
     }
 };
 
@@ -82,7 +82,7 @@ const claimPoints = async (req, res) => {
             totalPoints: user.points
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error claiming points', error });
+        res.status(500).json({ message: 'Error claiming points', error: error.message });
     }
 };
 
@@ -92,7 +92,7 @@ const getClaimHistory = async (req, res) => {
         const history = await ClaimHistory.find({ userId: req.params.id });
         res.json(history);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching claim history', error });
+        res.status(500).json({ message: 'Error fetching claim history', error: error.message });
     }
 };
 
@@ -102,7 +102,7 @@ const getAllPointHistories = async (req, res) => {
         const histories = await ClaimHistory.find();
         res.json(histories);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching point histories', error });
+        res.status(500).json({ message: 'Error fetching point histories', error: error.message });
     }
 };
 
