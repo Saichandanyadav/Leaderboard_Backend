@@ -4,6 +4,12 @@ const ClaimHistory = require('../models/ClaimHistory'); // Adjust the path as ne
 // Create User
 const createUser = async (req, res) => {
     const { name, email } = req.body;
+
+    // Basic validation
+    if (!name || !email) {
+        return res.status(400).json({ message: 'Name and email are required.' });
+    }
+
     const newUser = new User({ name, email, points: 0 });
 
     try {
