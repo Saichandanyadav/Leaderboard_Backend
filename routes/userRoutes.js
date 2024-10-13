@@ -8,7 +8,7 @@ const {
     claimPoints,
     getClaimHistory,
     getAllPointHistories
-} = require('../controllers/UserController');
+} = require('../controllers/userController');
 
 const router = express.Router();
 
