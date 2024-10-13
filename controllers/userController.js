@@ -63,7 +63,6 @@ const deleteUser = async (req, res) => {
     }
 };
 
-
 // Claim Points
 const claimPoints = async (req, res) => {
     const randomPoints = Math.floor(Math.random() * 1000) + 1; // Generate random points
@@ -97,9 +96,17 @@ const claimPoints = async (req, res) => {
 // Get Claim History
 const getClaimHistory = async (req, res) => {
     try {
-        const history = await ClaimHistory.find({ userId: req.params.id });
+        // Fetch claim history and populate user details
+        const history = await ClaimHistory.find({ userId: req.params.id }).populate('userId', 'name');
+
+        // Check if history is empty
+        if (!history.length) {
+            return res.status(404).json({ message: 'No claim history found for this user' });
+        }
+
         res.json(history);
     } catch (error) {
+        console.error('Error fetching claim history:', error); // Log the error
         res.status(500).json({ message: 'Error fetching claim history', error: error.message });
     }
 };
@@ -107,7 +114,7 @@ const getClaimHistory = async (req, res) => {
 // Get All Point Histories
 const getAllPointHistories = async (req, res) => {
     try {
-        const histories = await ClaimHistory.find();
+        const histories = await ClaimHistory.find().populate('userId', 'name');
         res.json(histories);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching point histories', error: error.message });
@@ -122,5 +129,5 @@ module.exports = {
     deleteUser,
     claimPoints,
     getClaimHistory,
-    getAllPointHistories
+    getAllPointHistories,
 };
