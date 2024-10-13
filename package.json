@@ -4,7 +4,7 @@
   "main": "api/index.js",
   "scripts": {
     "dev": "nodemon run dev",
-    "start": "node index"
+    "start": "node api/index.js"
   },
   "dependencies": {
     "backend": "file:",
