@@ -63,14 +63,16 @@ const deleteUser = async (req, res) => {
     }
 };
 
+
 // Claim Points
 const claimPoints = async (req, res) => {
-    const randomPoints = Math.floor(Math.random() * 1000) + 1; // Random points between 1 and 10
+    const randomPoints = Math.floor(Math.random() * 1000) + 1; // Generate random points
 
     try {
         const user = await User.findById(req.params.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
+        // Update user points
         user.points += randomPoints;
         await user.save();
 
@@ -78,14 +80,14 @@ const claimPoints = async (req, res) => {
         const claimHistory = new ClaimHistory({
             userId: user._id,
             pointsAwarded: randomPoints,
-            date: new Date()
+            date: new Date(),
         });
         await claimHistory.save();
 
         res.json({
             message: 'Points claimed successfully',
             pointsAwarded: randomPoints,
-            totalPoints: user.points
+            totalPoints: user.points,
         });
     } catch (error) {
         res.status(500).json({ message: 'Error claiming points', error: error.message });
